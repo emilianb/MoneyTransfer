@@ -3,14 +3,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using MoneyTransfer.Service;
-
 namespace MoneyTransfer.Api.Services
 {
     public class MoneyTransferHostedService
         : IHostedService
     {
-        public MoneyTransferHostedService(MoneyTransferService service)
+        public MoneyTransferHostedService(IMoneyTransferService service)
         {
             if (service == null)
             {
@@ -20,13 +18,7 @@ namespace MoneyTransfer.Api.Services
             Service = service;
         }
 
-        public string ConfigurationFilePath
-            => Service?.ConfigurationFilePath;
-
-        public string EnvironmentName
-            => Service?.EnvironmentName;
-
-        public MoneyTransferService Service { get; private set; }
+        public IMoneyTransferService Service { get; private set; }
 
         public Task StartAsync(CancellationToken cancellationToken)
             => Service.StartAsync(cancellationToken);

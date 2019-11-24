@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-using MoneyTransfer.Service.Commands;
+using MoneyTransfer.Messages;
 
 namespace MoneyTransfer.Api.Models.Mappings
 {
@@ -9,23 +9,23 @@ namespace MoneyTransfer.Api.Models.Mappings
     {
         public MoneyTransferMappingProfile()
         {
-            CreateMap<OpenAccount, OpenAccountCommand>()
+            CreateMap<OpenAccount, AccountCommands.Open>()
                 .ConstructUsing(
                     (OpenAccount source)
-                        => OpenAccountCommand.Create(
+                        => new AccountCommands.Open(
                             source.FirstName,
                             source.LastName,
                             source.Iban,
                             source.Amount,
                             source.CurrencyCode));
 
-            CreateMap<CloseAccount, CloseAccountCommand>()
-                .ConstructUsing((CloseAccount source) => CloseAccountCommand.Create(source.Iban));
+            CreateMap<CloseAccount, AccountCommands.Close>()
+                .ConstructUsing((CloseAccount source) => new AccountCommands.Close(source.Iban));
 
-            CreateMap<TransferAmount, TransferAmountCommand>()
+            CreateMap<Transfer, TransferCommand>()
                 .ConstructUsing(
-                    (TransferAmount source)
-                        => TransferAmountCommand.Create(
+                    (Transfer source)
+                        => TransferCommand.Create(
                             source.DebitorIban,
                             source.CreditorIban,
                             source.Amount,

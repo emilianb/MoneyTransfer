@@ -1,12 +1,11 @@
 ﻿using Akka.Actor;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading.Tasks;
 
 using MoneyTransfer.Api.Attributes;
 using MoneyTransfer.Api.Models;
 using MoneyTransfer.Api.Services;
-using MoneyTransfer.Service.Commands;
+using MoneyTransfer.Messages;
 
 namespace MoneyTransfer.Api.Controllers
 {
@@ -37,11 +36,11 @@ namespace MoneyTransfer.Api.Controllers
         private AutoMapper.IMapper Mapper { get; }
 
         [HttpPost("commands/transfer")]
-        public async Task<IActionResult> TransferAmount([NotNull, FromBody] TransferAmount request)
+        public IActionResult TransferAmount([NotNull, FromBody] Transfer request)
         {
-            var transferManagerActorRef = await TransferManagerActorProvider();
+            var transferManagerActorRef = TransferManagerActorProvider();
 
-            var command = Mapper.Map<TransferAmountCommand>(request);
+            var command = Mapper.Map<TransferCommand>(request);
 
             transferManagerActorRef.Tell(command, ActorRefs.NoSender);
 

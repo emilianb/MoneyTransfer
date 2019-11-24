@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  moneytransfer.api:
+    image: ${DOCKER_REGISTRY-}moneytransferapi
+    build:
+      context: .
+      dockerfile: MoneyTransfer.Api/Dockerfile
+  moneytransfer.db:
+    image: mongo:latest
+    environment: 
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017

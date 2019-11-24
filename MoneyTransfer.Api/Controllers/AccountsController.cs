@@ -5,8 +5,7 @@ using System;
 using MoneyTransfer.Api.Attributes;
 using MoneyTransfer.Api.Models;
 using MoneyTransfer.Api.Services;
-using MoneyTransfer.Service.Commands;
-using System.Threading.Tasks;
+using MoneyTransfer.Messages;
 
 namespace MoneyTransfer.Api.Controllers
 {
@@ -15,7 +14,7 @@ namespace MoneyTransfer.Api.Controllers
         : ControllerBase
     {
         public AccountsController(
-            AccountService accountService,
+            IAccountService accountService,
             AccountManagerActorProvider accountManagerActorProvider,
             AutoMapper.IMapper mapper)
         {
@@ -39,7 +38,7 @@ namespace MoneyTransfer.Api.Controllers
             Mapper = mapper;
         }
 
-        private AccountService AccountService { get; }
+        private IAccountService AccountService { get; }
 
         private AccountManagerActorProvider AccountManagerActorProvider { get; }
 
@@ -63,11 +62,11 @@ namespace MoneyTransfer.Api.Controllers
             => Ok(AccountService.GetAll());
 
         [HttpPost("commands/open")]
-        public async Task<IActionResult> OpenAccount([NotNull, FromBody] OpenAccount request)
+        public IActionResult OpenAccount([NotNull, FromBody] OpenAccount request)
         {
-            var accountManagerActorRef = await AccountManagerActorProvider();
+            var accountManagerActorRef = AccountManagerActorProvider();
 
-            var command = Mapper.Map<OpenAccountCommand>(request);
+            var command = Mapper.Map<AccountCommands.Open>(request);
 
             accountManagerActorRef.Tell(command, ActorRefs.NoSender);
 
@@ -75,11 +74,11 @@ namespace MoneyTransfer.Api.Controllers
         }
 
         [HttpPost("commands/close")]
-        public async Task<IActionResult> CloseAccount([NotNull, FromBody] CloseAccount request)
+        public IActionResult CloseAccount([NotNull, FromBody] CloseAccount request)
         {
-            var accountManagerActorRef = await AccountManagerActorProvider();
+            var accountManagerActorRef = AccountManagerActorProvider();
 
-            var command = Mapper.Map<CloseAccountCommand>(request);
+            var command = Mapper.Map<AccountCommands.Close>(request);
 
             accountManagerActorRef.Tell(command, ActorRefs.NoSender);
 

@@ -12,13 +12,13 @@ namespace MoneyTransfer.Api
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
             => services
-                .AddMappings()
-                .AddWebApi(builder => builder.AddValidations())
-                .AddMoneyTransferService();
+                .AddMapping()
+                .AddWebApi(builder => builder.AddValidation())
+                .AddMoneyTransfer();
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
             => app
-                .UseExceptions()
+                .UseGlobalExceptionHandler()
                 .UseHttpsRedirection()
                 .UseRouting()
                 .UseMvc();

@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "5c320fae-4642-4d8a-98b8-ec105784d374",
+		"name": "MoneyTransfer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Default",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44344/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Greetings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44344/greetings?name=John",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"greetings"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "John"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View all accounts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44344/accounts",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open EUR account for Raimund Eastby",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FirstName\": \"Raimund\",\n\t\"LastName\": \"Eastby\",\n\t\"Iban\": \"BE943944139340636GLX\",\n\t\"CurrencyCode\": \"EUR\",\n\t\"Amount\": 1371.89\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/accounts/commands/open",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"accounts",
+						"commands",
+						"open"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open EUR account for Marne Ghion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FirstName\": \"Marne\",\n\t\"LastName\": \"Ghion\",\n\t\"Iban\": \"FR385043396229CIARDX\",\n\t\"CurrencyCode\": \"EUR\",\n\t\"Amount\": 777.49\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/accounts/commands/open",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"accounts",
+						"commands",
+						"open"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open USD account for Morna Petric",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FirstName\": \"Morna\",\n\t\"LastName\": \"Petric\",\n\t\"Iban\": \"DE802875659358079344\",\n\t\"CurrencyCode\": \"USD\",\n\t\"Amount\": 2051.67\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/accounts/commands/open",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"accounts",
+						"commands",
+						"open"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer 100 EUR from Raimund Eastby to Morna Petric",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"DebitorIban\": \"BE943944139340636GLX\",\n\t\"CreditorIban\": \"DE802875659358079344\",\n\t\"CurrencyCode\": \"EUR\",\n\t\"Amount\": 100.00\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/transfers/commands/transfer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"transfers",
+						"commands",
+						"transfer"
+					]
+				},
+				"description": "This should not produce any effects since the accounts have different currency codes."
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer 1500 EUR from Raimund Eastby to Marne Ghion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"DebitorIban\": \"BE943944139340636GLX\",\n\t\"CreditorIban\": \"FR385043396229CIARDX\",\n\t\"CurrencyCode\": \"EUR\",\n\t\"Amount\": 1500.00\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/transfers/commands/transfer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"transfers",
+						"commands",
+						"transfer"
+					]
+				},
+				"description": "This should not produce any effects since the accounts because the debitor has insufficient funds.."
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer 100 EUR from Raimund Eastby to Marne Ghion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"DebitorIban\": \"BE943944139340636GLX\",\n\t\"CreditorIban\": \"FR385043396229CIARDX\",\n\t\"CurrencyCode\": \"EUR\",\n\t\"Amount\": 100.00\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/transfers/commands/transfer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"transfers",
+						"commands",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close USD account of Morna Petric",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Iban\": \"DE802875659358079344\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44344/accounts/commands/close",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44344",
+					"path": [
+						"accounts",
+						"commands",
+						"close"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

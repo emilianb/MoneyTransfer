@@ -27,7 +27,7 @@ namespace MoneyTransfer.Api.Configuration
                     .RequestServices
                     .GetService(typeof(GreetingManagerActorProvider));
 
-                var greetingManagerActorRef = await greetingManagerActorProvider();
+                var greetingManagerActorRef = greetingManagerActorProvider();
 
                 var greeting = await greetingManagerActorRef.Ask<string>(name, TimeSpan.FromSeconds(5));
 

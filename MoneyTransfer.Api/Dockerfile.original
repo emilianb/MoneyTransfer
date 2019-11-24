@@ -6,8 +6,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
 COPY ["MoneyTransfer.Api/MoneyTransfer.Api.csproj", "MoneyTransfer.Api/"]
-COPY ["MoneyTransfer.Messages/MoneyTransfer.Messages.csproj", "MoneyTransfer.Messages/"]
-COPY ["MoneyTransfer.Services/MoneyTransfer.Services.csproj", "MoneyTransfer.Services/"]
 RUN dotnet restore "MoneyTransfer.Api/MoneyTransfer.Api.csproj"
 COPY . .
 WORKDIR "/src/MoneyTransfer.Api"

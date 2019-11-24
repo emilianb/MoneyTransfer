@@ -3,43 +3,33 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>f3af9f1f-4030-4c70-867d-5554547ceb30</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <UserSecretsId>9e0419d7-63d9-4e44-a4dc-b2ce3f99e2d3</UserSecretsId>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Accounts.json" />
+    <None Remove="moneytransferservice.conf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="moneytransferservice.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="moneytransferservice.Development.cfg">
-      <DependentUpon>moneytransferservice.cfg</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Accounts.json" />
+    <Content Include="moneytransferservice.conf" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Akka.Logger.Serilog" Version="1.3.10" />
-    <PackageReference Include="Akka.Persistence.MongoDb" Version="1.3.14" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
-    <PackageReference Include="MongoDB.Driver" Version="2.9.3" />
-    <PackageReference Include="Serilog.AspNetCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoneyTransfer.Service\MoneyTransfer.Service.csproj" />
+    <ProjectReference Include="..\MoneyTransfer.Messages\MoneyTransfer.Messages.csproj" />
+    <ProjectReference Include="..\MoneyTransfer.Services\MoneyTransfer.Services.csproj" />
   </ItemGroup>
 
 </Project>
